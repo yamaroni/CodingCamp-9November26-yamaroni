@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense &amp; Budget Visualizer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-wrapper">
+
+      <!-- ===== Balance Display ===== -->
+      <header class="balance-header">
+        <h1>Expense &amp; Budget Visualizer</h1>
+        <div class="balance-card">
+          <span class="balance-label">Total Spending</span>
+          <span id="balance-display" class="balance-value">0.00</span>
+        </div>
+      </header>
+
+      <!-- ===== Error Banner ===== -->
+      <div id="error-banner" class="error-banner" role="alert" aria-live="assertive">
+        <span id="error-banner-message" class="error-banner__message"></span>
+        <button
+          id="error-banner-close"
+          class="error-banner__close"
+          type="button"
+          aria-label="Close error message"
+        >&times;</button>
+      </div>
+
+      <!-- ===== Main Content ===== -->
+      <main class="main-content">
+
+        <!-- Input Form -->
+        <section class="form-section" aria-labelledby="form-heading">
+          <h2 id="form-heading">Add Expense</h2>
+
+          <form id="input-form" novalidate>
+
+            <!-- Item Name -->
+            <div class="field-group">
+              <label for="input-name">Item Name</label>
+              <input
+                type="text"
+                id="input-name"
+                name="name"
+                maxlength="100"
+                required
+                autocomplete="off"
+                aria-describedby="error-name"
+                placeholder="e.g. Lunch"
+              />
+              <span id="error-name" class="field-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Amount -->
+            <div class="field-group">
+              <label for="input-amount">Amount</label>
+              <input
+                type="number"
+                id="input-amount"
+                name="amount"
+                min="0.01"
+                max="999999999.99"
+                step="0.01"
+                required
+                aria-describedby="error-amount"
+                placeholder="e.g. 12.50"
+              />
+              <span id="error-amount" class="field-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Category -->
+            <div class="field-group">
+              <label for="input-category">Category</label>
+              <select
+                id="input-category"
+                name="category"
+                required
+                aria-describedby="error-category"
+              >
+                <option value="">-- Select a category --</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Fun">Fun</option>
+              </select>
+              <span id="error-category" class="field-error" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="btn-submit">Add Expense</button>
+
+          </form>
+        </section>
+
+        <!-- Transaction List -->
+        <section class="list-section" aria-labelledby="list-heading">
+          <h2 id="list-heading">Transaction History</h2>
+          <ul id="transaction-list" aria-label="Transaction list">
+            <!-- Transactions rendered by renderList() -->
+          </ul>
+        </section>
+
+        <!-- Pie Chart -->
+        <section class="chart-section" aria-labelledby="chart-heading">
+          <h2 id="chart-heading">Spending by Category</h2>
+          <div id="chart-container">
+            <canvas id="pie-chart" role="img" aria-label="Pie chart showing spending by category"></canvas>
+            <p id="chart-placeholder" class="chart-placeholder">No spending data yet. Add an expense to see your breakdown.</p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
